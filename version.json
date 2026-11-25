@@ -1,5 +1,5 @@
 {
-  "version": "V1.0.0",
+  "version": "V1.0.1",
   "app": "Horario Escolar · Instituto Parroquial Nuestra Señora del Pilar · DEMO NO OFICIAL",
   "updated": "2026-11-24",
   "status": "PRUEBA",
@@ -12,6 +12,6 @@
     "de",
     "it"
   ],
-  "notes": "Horarios ficticios en 12 cursos. Banner e icono ilustrativos no oficiales; idioma ES/EN/PT/FR/DE/IT. No publicar hasta aprobación.",
-  "notice": "DEMO NO OFICIAL — V1.0.0 DE PRUEBA. No representa horarios ni identidad visual oficial."
+  "notes": "Mejora visual responsive: banner, botonera, contraste y tarjetas. Se conservan seis idiomas, tres temas y horarios ficticios de 12 cursos; emblema ilustrativo NO OFICIAL. No publicar sin aprobación.",
+  "notice": "DEMO NO OFICIAL — V1.0.1 DE PRUEBA. No representa horarios ni identidad visual oficial."
 }

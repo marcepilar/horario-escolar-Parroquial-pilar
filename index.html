@@ -1117,6 +1117,104 @@ body.theme-light .header-year{color:#205A87!important}
 .school-brand .school-brand-card .school-ident small {color:#E7D6BD!important;}
 body.theme-light .school-brand .school-brand-card {background:#211E2D!important;}
 
+
+
+/* Instituto Parroquial Pilar V1.0.1 — pulido visual responsive.
+   Solo presentación: no modifica materias, turnos, selector, idiomas ni lógica PWA.
+   El emblema sigue siendo ilustrativo y NO OFICIAL. */
+body.theme-blue {
+  --bg:#061325;
+  --surface:#132540;
+  --surface-alt:#1a3050;
+  --border:#3d587b;
+  --shade:#24466c;
+}
+body.theme-dark {
+  --bg:#0b111c;
+  --surface:#1b2332;
+  --surface-alt:#263143;
+  --border:#465167;
+  --shade:#344258;
+}
+/* Marco institucional elegante sin modificar ni recortar la imagen original. */
+.school-brand .school-brand-card {
+  border:1px solid #c4a16c!important;
+  border-radius:17px!important;
+  background:linear-gradient(135deg,#231d2e,#211d2c 63%,#2c2432)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,232,178,.11),0 7px 18px rgba(0,0,0,.20)!important;
+}
+body.theme-light .school-brand .school-brand-card {
+  background:linear-gradient(135deg,#231d2e,#211d2c 63%,#2c2432)!important;
+}
+.school-brand .school-brand-main{padding:0 2px!important;}
+.school-brand .school-brand-card .school-ident small{
+  color:#f2dfc2!important;
+  font-weight:800!important;
+  letter-spacing:.035em!important;
+}
+/* Jerarquía más clara sin aumentar la altura del encabezado. */
+.header-text h1{font-weight:850!important;letter-spacing:-.038em!important;}
+.header-year{font-weight:750!important;letter-spacing:.012em!important;}
+.actions{
+  border-color:color-mix(in srgb,var(--accent) 45%,var(--border))!important;
+  background:linear-gradient(155deg,color-mix(in srgb,var(--surface-alt) 62%,var(--bg)),var(--surface))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 4px 13px rgba(0,0,0,.17)!important;
+}
+.actions>.square{
+  border-color:color-mix(in srgb,var(--border) 78%,var(--accent) 22%)!important;
+  background:linear-gradient(154deg,color-mix(in srgb,var(--surface-alt) 88%,white 12%),var(--surface))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.11),0 2px 6px rgba(0,0,0,.12)!important;
+}
+.actions>.square:focus-visible{outline-offset:2px!important;}
+.actions>.course-btn{
+  background:linear-gradient(155deg,color-mix(in srgb,var(--accent) 22%,var(--shade)),var(--shade))!important;
+  border-color:color-mix(in srgb,var(--accent) 62%,var(--border))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 0 1px color-mix(in srgb,var(--accent) 14%,transparent)!important;
+}
+.cycle-strip{
+  border-color:color-mix(in srgb,var(--accent) 33%,var(--border))!important;
+  background:linear-gradient(105deg,color-mix(in srgb,var(--surface) 88%,var(--accent) 12%),var(--surface))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+.cycle-strip .fixed-label{color:#f0a8bc!important;letter-spacing:.025em!important;}
+body.theme-light .cycle-strip .fixed-label{color:#a92d59!important;}
+/* Tarjetas con borde nítido, relieve discreto y acento cromático por día. */
+.day{
+  border-radius:17px!important;
+  background:linear-gradient(115deg,color-mix(in srgb,var(--surface) 96%,var(--day-accent) 4%) 0%,var(--surface) 64%,color-mix(in srgb,var(--surface) 89%,var(--day-accent) 11%) 100%)!important;
+  border-color:color-mix(in srgb,var(--border) 82%,var(--day-accent) 18%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 4px 12px rgba(0,0,0,.16)!important;
+}
+.day::before{
+  width:4px!important;
+  box-shadow:0 0 9px color-mix(in srgb,var(--day-accent) 36%,transparent);
+}
+.day.today{
+  border-color:color-mix(in srgb,var(--accent) 83%,var(--border))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 0 0 1px color-mix(in srgb,var(--accent) 25%,transparent),0 5px 15px rgba(0,0,0,.20)!important;
+}
+.day[open]{border-color:var(--accent)!important;}
+.day-title{font-weight:860!important;}
+.day-desc{font-variant-numeric:tabular-nums;}
+.day-pill{
+  border-color:color-mix(in srgb,var(--day-accent) 59%,var(--border))!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--day-accent) 15%,transparent),0 2px 7px rgba(0,0,0,.10)!important;
+}
+.day.today .day-pill{border-color:color-mix(in srgb,var(--accent) 72%,var(--border))!important;}
+.chevron{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))!important;}
+/* En el tema claro mantenemos contraste; el banner continúa oscuro. */
+body.theme-light .actions>.square{
+  background:linear-gradient(154deg,#ffffff,var(--surface-alt))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 2px 6px rgba(12,39,64,.08)!important;
+}
+body.theme-light .day{box-shadow:inset 0 1px 0 #fff,0 3px 10px rgba(24,53,80,.11)!important;}
+@media(max-height:620px){
+ .school-brand .school-brand-card{box-shadow:0 3px 9px rgba(0,0,0,.15)!important;}
+ .day{box-shadow:0 2px 7px rgba(0,0,0,.11)!important;}
+}
+@media(prefers-reduced-motion:reduce){
+ .day,.actions>.square{transition:none!important;}
+}
 </style>
 </head>
 <body class="theme-blue">
@@ -1256,7 +1354,7 @@ const themes=['theme-blue','theme-light','theme-dark'];
 // Cambiar SCHOOL_CYCLE_YEAR al incorporar los horarios del nuevo ciclo lectivo.
 // No depende del 1 de enero ni de la fecha del dispositivo.
 const SCHOOL_CYCLE_YEAR=2027;
-const APP_VERSION='V1.0.0';
+const APP_VERSION='V1.0.1';
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
   'theme-blue': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><defs><linearGradient id=\"waningBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop stop-color=\"#D0F1FF\"/><stop offset=\".45\" stop-color=\"#81C8FF\"/><stop offset=\"1\" stop-color=\"#3087EA\"/></linearGradient></defs><path transform=\"rotate(11 12 12)\" d=\"M12 2.3 A9.7 9.7 0 0 0 12 21.7 C5.05 17.25 5.05 6.75 12 2.3Z\" fill=\"url(#waningBlue)\" stroke=\"#A9DCFF\" stroke-width=\".36\" stroke-linejoin=\"round\"/></svg></span>",

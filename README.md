@@ -1,4 +1,4 @@
-# Instituto Parroquial Nuestra Señora del Pilar — Horario Escolar V1.0.0 (DEMO, DE PRUEBA)
+# Instituto Parroquial Nuestra Señora del Pilar — Horario Escolar V1.0.1 (DEMO, DE PRUEBA)
 
 **Aviso de identidad:** Propuesta independiente y NO OFICIAL de MARK-TECH SOFTWARE.
 Colegio real: Instituto Parroquial Nuestra Señora del Pilar, Belgrano 556, Pilar, Buenos Aires.
@@ -15,4 +15,10 @@ Crear repositorio público llamado `horario-escolar-parroquial-pilar`, habilitar
 URL prevista: https://marcepilar.github.io/horario-escolar-parroquial-pilar/
 El QR local está codificado hacia esa URL prevista y no será útil hasta que se publique el repositorio. Cuando la PWA está publicada, el selector Compartir genera el QR de la URL efectiva (requiere conexión para el proveedor externo de QR).
 
-**V1.0.0 DE PRUEBA**: no publicamos ni declaramos estable hasta aprobación explícita. Verificar instalación en dispositivo físico antes de presentar a la institución.
+**V1.0.1 DE PRUEBA**: no publicamos ni declaramos estable hasta aprobación explícita. Verificar instalación en dispositivo físico antes de presentar a la institución.
+
+## Cambios V1.0.1 (visual)
+- Refinamiento del banner institucional ilustrativo (sin afirmar autenticidad del escudo).
+- Mejor contraste y relieve sutil en botonera, año, banda de turno y tarjetas de materias.
+- Sin cambios en contenido, seis idiomas, tres temas, doce cursos, interacciones, PWA ni horarios ficticios.
+- Versión de prueba pendiente de evaluación; no publicada.
