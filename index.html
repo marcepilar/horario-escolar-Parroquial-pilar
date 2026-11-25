@@ -1216,7 +1216,7 @@ body.theme-light .day{box-shadow:inset 0 1px 0 #fff,0 3px 10px rgba(24,53,80,.11
  .day,.actions>.square{transition:none!important;}
 }
 
-/* V1.0.2 PRUEBA — sustitución REAL del banner de cabecera.
+/* V1.0.2 — sustitución REAL del banner de cabecera.
    Imagen institucional ILUSTRATIVA, NO OFICIAL. No se altera el resto de la PWA. */
 .school-brand{background:none!important;border:0!important;padding:0!important;overflow:visible!important;}
 .school-brand .school-brand-card{
@@ -1255,6 +1255,31 @@ body.theme-light .school-brand .school-brand-card{
 }
 @media(max-width:350px){.school-brand .school-brand-card{padding:3px 3px 6px!important;gap:3px!important}}
 
+
+/* V1.0.3 — Banner de una sola pieza; sin marco dibujado dentro de la imagen. */
+.school-brand .school-brand-card{
+  padding:0!important;gap:0!important;
+  background:#140c21!important;
+  border:1px solid #b48d50!important;
+  border-radius:18px!important;
+  box-shadow:0 5px 16px rgba(0,0,0,.22)!important;
+  overflow:hidden!important;
+}
+.school-brand .school-brand-main{
+  margin:0!important;padding:0!important;line-height:0!important;overflow:hidden!important;
+}
+.school-brand .school-brand-card .school-brand-main img.school-brand-logo{
+  display:block!important;width:100%!important;max-width:100%!important;height:auto!important;
+  margin:0!important;padding:0!important;object-fit:contain!important;
+  border:0!important;border-radius:0!important;
+}
+.school-brand .school-brand-card .school-ident{
+  padding:6px 6px 8px!important;background:linear-gradient(90deg,#100d1c,#23132c 52%,#100d1c)!important;
+}
+.school-brand .school-brand-card .school-ident small{letter-spacing:.015em!important;}
+body.theme-light .school-brand .school-brand-card{background:#140c21!important;}
+@media(max-width:350px){.school-brand .school-brand-card{padding:0!important;gap:0!important;}}
+
 </style>
 </head>
 <body class="theme-blue">
@@ -1262,7 +1287,7 @@ body.theme-light .school-brand .school-brand-card{
  <div class="school-brand" aria-label="Vista de demostración no oficial para Instituto Parroquial Nuestra Señora del Pilar">
   <div class="school-brand-card">
     <div class="school-brand-main">
-      <img class="school-brand-logo" src="./banner-instituto-parroquial-pilar-v102.png" alt="Banner institucional ilustrativo no oficial del Instituto Parroquial Nuestra Señora del Pilar" width="1600" height="533" decoding="async">
+      <img class="school-brand-logo" src="./banner-instituto-parroquial-pilar-v103.png" alt="Banner institucional ilustrativo no oficial del Instituto Parroquial Nuestra Señora del Pilar" width="1600" height="533" decoding="async">
     </div>
     <div class="school-ident"><small>DEMO NO OFICIAL · HORARIOS FICTICIOS</small></div>
   </div>
@@ -1394,7 +1419,7 @@ const themes=['theme-blue','theme-light','theme-dark'];
 // Cambiar SCHOOL_CYCLE_YEAR al incorporar los horarios del nuevo ciclo lectivo.
 // No depende del 1 de enero ni de la fecha del dispositivo.
 const SCHOOL_CYCLE_YEAR=2027;
-const APP_VERSION='V1.0.2';
+const APP_VERSION='V1.0.3';
 $('helpAppVersion').textContent=APP_VERSION;
 const themeIcons={
   'theme-blue': "<span class=\"theme-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" focusable=\"false\"><defs><linearGradient id=\"waningBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop stop-color=\"#D0F1FF\"/><stop offset=\".45\" stop-color=\"#81C8FF\"/><stop offset=\"1\" stop-color=\"#3087EA\"/></linearGradient></defs><path transform=\"rotate(11 12 12)\" d=\"M12 2.3 A9.7 9.7 0 0 0 12 21.7 C5.05 17.25 5.05 6.75 12 2.3Z\" fill=\"url(#waningBlue)\" stroke=\"#A9DCFF\" stroke-width=\".36\" stroke-linejoin=\"round\"/></svg></span>",
@@ -1587,47 +1612,47 @@ function applyTheme(){
 
 let swReg=null;
 let pendingVersion='';
+let latestPublishedVersion=APP_VERSION;
 let userRequestedUpdate=false;
+// Evita bucles si version.json es más viejo que el HTML o un worker quedó en espera.
+function isNewerVersion(candidate,current=APP_VERSION){
+  const numeric=v=>String(v||'').replace(/^v/i,'').split('.').map(n=>Number.parseInt(n,10));
+  const a=numeric(candidate),b=numeric(current);
+  if(a.some(n=>!Number.isFinite(n)) || b.some(n=>!Number.isFinite(n)))return false;
+  for(let i=0;i<Math.max(a.length,b.length);i++){
+    if((a[i]||0)>(b[i]||0))return true;
+    if((a[i]||0)<(b[i]||0))return false;
+  }
+  return false;
+}
 function showUpdateBanner(version=''){
-  pendingVersion=version||'';
-  $('updateText').textContent = version && version!==APP_VERSION
-    ? `Hay una nueva versión disponible (${version}). Volvé a cargar la app para instalarla.`
-    : 'Hay una nueva versión de Horario Escolar lista para instalar.';
+  const newer=version||latestPublishedVersion;
+  if(!isNewerVersion(newer,APP_VERSION)) {hideUpdateBanner();return;}
+  pendingVersion=newer;
+  $('updateText').textContent=`Hay una nueva versión disponible (${newer}). Volvé a cargar la app para instalarla.`;
   $('updateBanner').hidden=false;
 }
 function hideUpdateBanner(){ $('updateBanner').hidden=true; }
 function attachRegListeners(reg){
-  if(!reg) return;
-  if(reg.waiting) showUpdateBanner();
+  if(!reg)return;
   reg.addEventListener('updatefound',()=>{
     const worker=reg.installing;
-    if(!worker) return;
+    if(!worker)return;
     worker.addEventListener('statechange',()=>{
-      if(worker.state==='installed' && navigator.serviceWorker.controller){
-        showUpdateBanner();
-      }
+      if(worker.state==='installed'&&navigator.serviceWorker.controller)checkForUpdates();
     });
   });
 }
 async function checkForUpdates(){
   try{
-    if(swReg) await swReg.update().catch(()=>{});
-  }catch(_){ }
-  try{
-    const res = await fetch('./version.json?ts='+Date.now(), {cache:'no-store'});
-    if(res.ok){
-      const info = await res.json();
-      if(info?.version && info.version !== APP_VERSION){
-        showUpdateBanner(info.version);
-      }else if(swReg?.waiting){
-        showUpdateBanner();
-      }
-    }else if(swReg?.waiting){
-      showUpdateBanner();
-    }
-  }catch(_){
-    if(swReg?.waiting) showUpdateBanner();
-  }
+    const res=await fetch('./version.json?check='+Date.now(),{cache:'no-store'});
+    if(!res.ok)return;
+    const info=await res.json();
+    if(typeof info?.version!=='string')return;
+    latestPublishedVersion=info.version;
+    if(isNewerVersion(info.version,APP_VERSION))showUpdateBanner(info.version);
+    else hideUpdateBanner();
+  }catch(_){/* Sin conexión: no mostrar una actualización fantasma. */}
 }
 // Marca el día local sin reemplazar el contador de clases.
 function syncTodayMarkers(now=new Date()){
@@ -1977,18 +2002,28 @@ document.addEventListener('keydown',evt=>{if(evt.key==='Escape'&&(view.pane||vie
 
 $('dismissUpdate').addEventListener('click',hideUpdateBanner);
 $('applyUpdate').addEventListener('click',async()=>{
-  // Abrir la URL de la versión publicada para evitar reutilizar el documento anterior.
+  const control=$('applyUpdate');
+  control.disabled=true;
   const target=new URL('./index.html',location.href);
-  target.searchParams.set('refresh',pendingVersion||String(Date.now()));
+  target.searchParams.set('mt_refresh',String(Date.now()));
   try{
-    if(swReg) await swReg.update().catch(()=>{});
-    if(swReg?.waiting){
-      userRequestedUpdate=true;
-      swReg.waiting.postMessage({type:'SKIP_WAITING'});
-      return;
+    // La URL nueva evita que el SW anterior sirva index.html desde su caché.
+    const candidate=await fetch(target.href,{cache:'no-store'});
+    if(!candidate.ok)throw new Error('No se pudo descargar el HTML actualizado');
+    // Conservar el estado local: nunca borrar localStorage ni IndexedDB.
+    const reg=swReg||await navigator.serviceWorker.getRegistration();
+    if(reg)await reg.unregister();
+    if('caches' in window){
+      const keys=await caches.keys();
+      await Promise.all(keys.filter(k=>k.startsWith('marktech-horario-parroquial-pilar-demo-')).map(k=>caches.delete(k)));
     }
-  }catch(_){ }
-  location.replace(target.href);
+    userRequestedUpdate=true;
+    location.replace(target.href);
+  }catch(_){
+    control.disabled=false;
+    // Si falla la red, preservar lo instalado para mantener el uso sin conexión.
+    $('updateText').textContent=localeText().updateReady;
+  }
 });
 
 // Navegación integrada con el botón Atrás de Android/iPhone y el historial.
@@ -2009,14 +2044,11 @@ $('nativeShare').addEventListener('click',async()=>{
 });
 if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
   navigator.serviceWorker.addEventListener('controllerchange',()=>{
-    if(userRequestedUpdate){
-      const url=new URL('./index.html',location.href);
-      url.searchParams.set('refresh',pendingVersion||String(Date.now()));
-      location.replace(url.href);
-    }
+    // El botón Actualizar ya hace un único reemplazo de URL. No recargar aquí.
+    if(userRequestedUpdate)userRequestedUpdate=false;
   });
   window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./service-worker.js')
+    navigator.serviceWorker.register('./service-worker.js',{updateViaCache:'none'})
       .then(reg=>{ swReg=reg; attachRegListeners(reg); checkForUpdates(); })
       .catch(()=>{});
   });

@@ -1,5 +1,5 @@
 {
-  "version": "V1.0.2",
+  "version": "V1.0.3",
   "app": "Horario Escolar · Instituto Parroquial Nuestra Señora del Pilar · DEMO NO OFICIAL",
   "updated": "2026-11-24",
   "status": "PRUEBA",
@@ -12,6 +12,6 @@
     "de",
     "it"
   ],
-  "notes": "Reemplazo efectivo del banner del Instituto Parroquial en index.html, vista interactiva HTML y caché de la PWA. Emblema referencial y no oficial. Resto de funciones y horarios sin cambios.",
-  "notice": "V1.0.2 DE PRUEBA — ESCUDO NO OFICIAL Y HORARIOS FICTICIOS."
+  "notes": "Arregla actualización repetitiva por diferencias de versión, precarga sin caché HTTP y navegación network-first. Nuevo banner sin marco interior duplicado. Horarios y funcionalidades conservados.",
+  "notice": "V1.0.3 DE PRUEBA — DEMO NO OFICIAL Y HORARIOS FICTICIOS."
 }
